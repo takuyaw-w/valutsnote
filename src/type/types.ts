@@ -1,4 +1,4 @@
 export type Config = {
-  password: string;
+  password_hash: string;
   salt: string;
 };

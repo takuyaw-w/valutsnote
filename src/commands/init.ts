@@ -6,7 +6,8 @@ import * as path from "@std/path";
 import { bold, red } from "@std/fmt/colors";
 import { encoder } from "../utils/encoder.ts";
 import { getHomeDirectory } from "../utils/path.ts";
-import { generatePassword } from "../utils/auth.ts";
+import { hashPassword } from "../utils/auth.ts";
+import { CONFIG_FILE_NAME } from '../const/app.ts'
 
 async function promptForPassword(): Promise<string> {
   const password: string = await Secret.prompt({
@@ -61,8 +62,8 @@ async function init() {
   await confirmOverwriteIfExists(dotFolderPath);
 
   const password = await promptForPassword();
-  const passwordData = await generatePassword(password);
-  await saveConfigFile(path.join(dotFolderPath, "config.json"), passwordData);
+  const passwordData = await hashPassword(password);
+  await saveConfigFile(path.join(dotFolderPath, CONFIG_FILE_NAME), passwordData);
 }
 
 export const initCommand = new Command()
