@@ -5,9 +5,9 @@ import { version as vnoteVersion } from "../version.ts";
 import * as path from "@std/path";
 import { bold, red } from "@std/fmt/colors";
 import { encoder } from "../utils/encoder.ts";
-import { getHomeDirectory } from "../utils/path.ts";
+import { getAppDir, getConfigFilePath } from "../utils/path.ts";
 import { hashPassword } from "../utils/auth.ts";
-import { CONFIG_FILE_NAME } from '../const/app.ts'
+import { Config } from "../type/types.ts";
 
 async function promptForPassword(): Promise<string> {
   const password: string = await Secret.prompt({
@@ -56,14 +56,13 @@ async function confirmOverwriteIfExists(directoryPath: string): Promise<void> {
 }
 
 async function init() {
-  const homeDir = getHomeDirectory();
-  const dotFolderPath = path.resolve(homeDir, ".vaultnote");
+  const appDir = getAppDir();
 
-  await confirmOverwriteIfExists(dotFolderPath);
+  await confirmOverwriteIfExists(appDir);
 
   const password = await promptForPassword();
   const passwordData = await hashPassword(password);
-  await saveConfigFile(path.join(dotFolderPath, CONFIG_FILE_NAME), passwordData);
+  await saveConfigFile(getConfigFilePath(), passwordData);
 }
 
 export const initCommand = new Command()
