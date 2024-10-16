@@ -4,10 +4,10 @@ import { ensureDir, exists } from "@std/fs";
 import { version as vnoteVersion } from "../version.ts";
 import * as path from "@std/path";
 import { bold, red } from "@std/fmt/colors";
-import { encoder } from "../utils/encoder.ts";
-import { getAppDir, getConfigFilePath } from "../utils/path.ts";
-import { hashPassword } from "../utils/auth.ts";
-import { Config } from "../type/types.ts";
+import { encoder } from "../services/encoder.ts";
+import { getAppDir, getConfigFilePath } from "../services/path.ts";
+import { hashPassword } from "../services/hasher.ts";
+import { Config } from "../types/config.ts";
 
 async function promptForPassword(): Promise<string> {
   const password: string = await Secret.prompt({

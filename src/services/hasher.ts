@@ -1,6 +1,6 @@
 import { encoder } from "./encoder.ts";
 import { decodeHex, encodeHex } from "@std/encoding";
-import type { Config } from "../type/types.ts";
+import type { Config } from "../types/config.ts";
 
 const ITERATIONS = 700_001;
 

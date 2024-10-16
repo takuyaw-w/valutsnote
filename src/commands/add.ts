@@ -1,9 +1,9 @@
 import { Command, Option } from "@cliffy/command";
 import { Secret } from "@cliffy/prompt";
 import { version as vnoteVersion } from "../version.ts";
-import { verifyPassword } from "../utils/auth.ts";
-import { getConfigFilePath } from "../utils/path.ts";
-import type { Config } from "../type/types.ts";
+import { verifyPassword } from "../services/hasher.ts";
+import { getConfigFilePath } from "../services/path.ts";
+import type { Config } from "../types/config.ts";
 
 async function add(_option: Option, key: string, value: string) {
   const configFilePath = getConfigFilePath();
