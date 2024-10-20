@@ -7,7 +7,9 @@ import type { Config } from "../types/config.ts";
 
 async function add(_option: Option, key: string, value: string) {
   const configFilePath = getConfigFilePath();
-  const storedPass = JSON.parse(await Deno.readTextFile(configFilePath)) as Config;
+  const storedPass = JSON.parse(
+    await Deno.readTextFile(configFilePath),
+  ) as Config;
   const password = await Secret.prompt("please input password.");
 
   if (

@@ -3,35 +3,26 @@ import { Confirm, Secret } from "@cliffy/prompt";
 import { ensureDir, exists } from "@std/fs";
 import { version as vnoteVersion } from "../version.ts";
 import * as path from "@std/path";
-import { bold, red } from "@std/fmt/colors";
+import { errorMsg, successMsg } from "../utils/message.ts";
 import { encoder } from "../services/encoder.ts";
 import { getAppDir, getConfigFilePath } from "../services/path.ts";
 import { hashPassword } from "../services/hasher.ts";
 import { Config } from "../types/config.ts";
 
+const MIN_LENGTH = 1;
+
 async function promptForPassword(): Promise<string> {
   const password: string = await Secret.prompt({
     message: "Enter your password.",
+    minLength: MIN_LENGTH,
   });
   const confirmPassword: string = await Secret.prompt({
     message: "Enter your Confirm password.",
+    minLength: MIN_LENGTH,
   });
 
-  if (password.length === 0 || confirmPassword.length === 0) {
-    console.error(
-      bold(
-        red(
-          `Error: Password cannot be empty. Please enter a password with at least one character.`,
-        ),
-      ),
-    );
-    Deno.exit(1);
-  }
-
   if (password !== confirmPassword) {
-    console.error(
-      bold(red(`Error: Passwords do not match. Please try again.`)),
-    );
+    errorMsg(`Error: Passwords do not match. Please try again.`);
     Deno.exit(1);
   }
 
@@ -60,9 +51,10 @@ async function init() {
 
   await confirmOverwriteIfExists(appDir);
 
-  const password = await promptForPassword();
-  const passwordData = await hashPassword(password);
-  await saveConfigFile(getConfigFilePath(), passwordData);
+  const recivedPassword = await promptForPassword();
+  const writePassword = await hashPassword(recivedPassword);
+  await saveConfigFile(getConfigFilePath(), writePassword);
+  successMsg("Initialization successful. Your password has been set.");
 }
 
 export const initCommand = new Command()
