@@ -4,9 +4,9 @@ import { ensureDir, exists } from "@std/fs";
 import { version as vnoteVersion } from "../version.ts";
 import * as path from "@std/path";
 import { errorMsg, successMsg } from "../utils/message.ts";
-import { encoder } from "../services/encoder.ts";
-import { getAppDir, getConfigFilePath } from "../services/path.ts";
-import { hashPassword } from "../services/hasher.ts";
+import { encoder } from "../utils/encoder.ts";
+import { getAppDir, getConfigFilePath } from "../utils/path.ts";
+import { hashPassword } from "../utils/hasher.ts";
 import { Config } from "../types/config.ts";
 
 const MIN_LENGTH = 1;
