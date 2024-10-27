@@ -75,4 +75,5 @@ async function add(_option: CommandOptions, key: string, value: string) {
 export const addCommand = new Command()
   .version(vnoteVersion)
   .arguments("<key:string> <value:string>")
+  .description("Add a new secure memo or update an existing one using your master password for encryption.")
   .action(add);

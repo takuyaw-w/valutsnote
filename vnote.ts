@@ -5,8 +5,8 @@ import { viewCommand } from "./src/commands/view.ts";
 
 new Command()
   .name("vnote")
-  .description("description")
-  .usage("vnote <subcommand>")
+  .description("A secure command-line tool for managing encrypted personal memos.")
+  .usage("<subcommand>")
   .command("init", initCommand)
   .command("add", addCommand)
   .command("view", viewCommand)

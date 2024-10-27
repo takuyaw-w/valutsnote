@@ -59,4 +59,5 @@ async function init() {
 
 export const initCommand = new Command()
   .version(vnoteVersion)
+  .description("Initialize VaultNote by setting up a master password to encrypt and manage your secure notes.")
   .action(init);

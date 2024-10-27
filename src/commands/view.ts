@@ -52,4 +52,5 @@ async function view(_option: CommandOptions, key: string) {
 export const viewCommand = new Command()
   .version(vnoteVersion)
   .arguments("<key:string>")
+  .description("View an existing memo by providing its key, after verifying with your master password.")
   .action(view);
