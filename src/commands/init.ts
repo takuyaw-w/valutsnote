@@ -4,7 +4,7 @@ import { ensureDir, exists } from "@std/fs";
 import { version as vnoteVersion } from "../version.ts";
 import * as path from "@std/path";
 import { errorMsg, successMsg } from "../utils/message.ts";
-import { encoder } from "../utils/encoder.ts";
+import { textEncoder } from "../utils/encoder.ts";
 import { getAppDir, getConfigFilePath } from "../utils/path.ts";
 import { hashPassword } from "../utils/hasher.ts";
 import { Config } from "../types/config.ts";
@@ -31,7 +31,7 @@ async function promptForPassword(): Promise<string> {
 
 async function saveConfigFile(filePath: string, data: Config): Promise<void> {
   await ensureDir(path.dirname(filePath));
-  const configData = encoder.encode(JSON.stringify(data, null, 2));
+  const configData = textEncoder.encode(JSON.stringify(data, null, 2));
   await Deno.writeFile(filePath, configData);
 }
 

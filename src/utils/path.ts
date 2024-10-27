@@ -1,5 +1,5 @@
 import * as path from "@std/path";
-import { APP_DIR, CONFIG_FILE_NAME } from "../const/app.ts";
+import { APP_DIR, CONFIG_FILE_NAME, MEMO_FILE_NAME } from "../const/app.ts";
 
 export function getHomeDir(): string {
   const homeDir = Deno.env.get("HOME") || Deno.env.get("USERPROFILE");
@@ -19,4 +19,10 @@ export function getConfigFilePath(): string {
   const appDir = getAppDir();
   const configFilePath = path.resolve(appDir, CONFIG_FILE_NAME);
   return configFilePath;
+}
+
+export function getMemoFilePath(): string {
+  const appDir = getAppDir();
+  const memoFilePath = path.resolve(appDir, MEMO_FILE_NAME);
+  return memoFilePath;
 }

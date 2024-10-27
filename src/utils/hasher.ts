@@ -1,4 +1,4 @@
-import { encoder } from "./encoder.ts";
+import { textEncoder } from "./encoder.ts";
 import { decodeHex, encodeHex } from "@std/encoding";
 import type { Config } from "../types/config.ts";
 
@@ -8,7 +8,7 @@ export async function hashPassword(password: string): Promise<Config> {
   const salt = await crypto.getRandomValues(new Uint8Array(16));
   const passwordKey = await crypto.subtle.importKey(
     "raw",
-    encoder.encode(password),
+    textEncoder.encode(password),
     { name: "PBKDF2" },
     false,
     ["deriveBits"],
@@ -37,7 +37,7 @@ export async function verifyPassword(
 ): Promise<boolean> {
   const passwordKey = await crypto.subtle.importKey(
     "raw",
-    encoder.encode(password),
+    textEncoder.encode(password),
     { name: "PBKDF2" },
     false,
     ["deriveBits"],
