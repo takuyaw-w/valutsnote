@@ -29,7 +29,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ./vnote_for_windows
+            ./vnote_for_windows.exe
             ./vnote_for_linux
             ./vnote_for_mac_x86_64
             ./vnote_for_mac_arm
