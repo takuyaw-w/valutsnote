@@ -1,0 +1,35 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Build CLI tool
+        run: |
+          deno compile --allow-read --allow-write --output=vnote_for_windows.exe --target=x86_64-pc-windows-msvc ./vnote.ts
+          deno compile --allow-read --allow-write --output=vnote_for_linux --target=x86_64-unknown-linux-gnu ./vnote.ts
+          deno compile --allow-read --allow-write --output=vnote_for_mac_x86_64 --target=x86_64-apple-darwin ./vnote.ts
+          deno compile --allow-read --allow-write --output=vnote_for_mac_arm --target=aarch64-apple-darwin ./vnote.ts
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ./vnote_for_windows
+            ./vnote_for_linux
+            ./vnote_for_mac_x86_64
+            ./vnote_for_mac_arm
