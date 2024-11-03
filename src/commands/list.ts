@@ -7,7 +7,7 @@ import {
   loadOrCreateMemo,
   promptAndVerifyPassword,
 } from "../utils/memo.ts";
-import { formatDate } from '../utils/date.ts'
+import { formatDate } from "../utils/date.ts";
 
 async function list(_option: CommandOptions, simple: boolean) {
   try {
@@ -30,7 +30,9 @@ async function list(_option: CommandOptions, simple: boolean) {
       for (const m of memo) {
         const createdAt = formatDate(m.createdAt);
         const updatedAt = formatDate(m.updatedAt);
-        successMsg(`Key: ${m.key}\n  Created At: ${createdAt}\n  Updated At: ${updatedAt}`);
+        successMsg(
+          `Key: ${m.key}\n  Created At: ${createdAt}\n  Updated At: ${updatedAt}`,
+        );
       }
     }
   } catch (error) {
@@ -45,10 +47,9 @@ async function list(_option: CommandOptions, simple: boolean) {
 export const listCommand = new Command()
   .version(vnoteVersion)
   .description(
-    "List all secure memos after verifying with your master password."
+    "List all secure memos after verifying with your master password.",
   )
   .option("-s, --simple", "Display only the memo keys in a simple list format.")
   .action((options: CommandOptions) => {
     list(options, options.simple);
   });
-

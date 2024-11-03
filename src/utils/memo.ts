@@ -73,3 +73,11 @@ export async function promptAndVerifyPassword(config: Config): Promise<void> {
     Deno.exit(1);
   }
 }
+
+export async function saveMemoToFile(memo: SecureMemo[]): Promise<void> {
+  const memoFilePath = getMemoFilePath();
+  await Deno.writeFile(
+    memoFilePath,
+    textEncoder.encode(JSON.stringify(memo, null, 2)),
+  );
+}

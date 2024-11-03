@@ -19,6 +19,9 @@ async function view(_option: CommandOptions, key: string) {
     if (findMemo) {
       const decryptedMemo = await decryptoMemo(config.password_hash, findMemo);
       successMsg(`${key}: ${decryptedMemo}`);
+    } else {
+      errorMsg(`No memo found with the key '${key}'.`);
+      Deno.exit(1);
     }
   } catch (e) {
     if (e instanceof Error) {

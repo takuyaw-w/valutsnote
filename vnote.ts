@@ -4,6 +4,7 @@ import { initCommand } from "./src/commands/init.ts";
 import { addCommand } from "./src/commands/add.ts";
 import { viewCommand } from "./src/commands/view.ts";
 import { listCommand } from "./src/commands/list.ts";
+import { deleteCommand } from "./src/commands/delete.ts";
 
 try {
   await new Command()
@@ -19,6 +20,7 @@ try {
     .command("add", addCommand)
     .command("view", viewCommand)
     .command("list", listCommand)
+    .command("delete", deleteCommand)
     .reset()
     .parse(Deno.args);
 } catch (e) {
