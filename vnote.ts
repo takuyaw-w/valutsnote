@@ -3,6 +3,7 @@ import { version } from "./src/version.ts";
 import { initCommand } from "./src/commands/init.ts";
 import { addCommand } from "./src/commands/add.ts";
 import { viewCommand } from "./src/commands/view.ts";
+import { listCommand } from "./src/commands/list.ts";
 
 try {
   await new Command()
@@ -17,6 +18,7 @@ try {
     .command("init", initCommand)
     .command("add", addCommand)
     .command("view", viewCommand)
+    .command("list", listCommand)
     .reset()
     .parse(Deno.args);
 } catch (e) {
