@@ -2,6 +2,9 @@
 
 VaultNote is a secure command-line tool for managing encrypted personal memos. It allows you to create, view, list, and delete memos while ensuring that your data is protected with a master password. Each memo is securely encrypted before being stored on your device, making VaultNote an ideal choice for those who value their privacy.
 
+[![GitHub License](https://img.shields.io/github/license/takuyaw-w/vaultnote)](https://github.com/takuyaw-w/vaultnote/blob/main/LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/takuyaw-w/vaultnote)](https://github.com/takuyaw-w/vaultnote/releases)
+
 ## Features
 
 - **Secure Memos**: All memos are encrypted with a master password.
