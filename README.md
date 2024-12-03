@@ -56,10 +56,8 @@ To view an existing memo, use the `view` command. You will need the master
 password to decrypt the content.
 
 ```sh
-$ vnote view <key>
+$ vnote view
 ```
-
-- `<key>`: The key of the memo you want to view.
 
 ### List All Memos
 
