@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run -A vnote.ts"
+    "dev": "deno run -A vnote.ts",
+    "test": "deno test -A"
   },
   "imports": {
     "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.7",
