@@ -8,19 +8,24 @@ import {
   loadOrCreateMemo,
   promptAndVerifyPassword,
 } from "../utils/memo.ts";
+import { Select } from "@cliffy/prompt";
 
-async function view(_option: CommandOptions, key: string) {
+async function view(_option: CommandOptions) {
   try {
     const config = await loadConfig();
     await promptAndVerifyPassword(config);
 
     const memo = await loadOrCreateMemo();
-    const findMemo = memo.find((m) => m.key === key);
+    const selectedKey = await Select.prompt({
+      message: "please select key.",
+      options: memo.map((v) => v.key),
+    });
+    const findMemo = memo.find((m) => m.key === selectedKey);
     if (findMemo) {
       const decryptedMemo = await decryptoMemo(config.password_hash, findMemo);
-      successMsg(`${key}: ${decryptedMemo}`);
+      successMsg(`${selectedKey}: ${decryptedMemo}`);
     } else {
-      errorMsg(`No memo found with the key '${key}'.`);
+      errorMsg(`No memo found with the key '${selectedKey}'.`);
       Deno.exit(1);
     }
   } catch (e) {
@@ -34,7 +39,6 @@ async function view(_option: CommandOptions, key: string) {
 
 export const viewCommand = new Command()
   .version(vnoteVersion)
-  .arguments("<key:string>")
   .description(
     "View an existing memo by providing its key, after verifying with your master password.",
   )
