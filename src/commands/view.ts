@@ -8,7 +8,7 @@ import {
   loadOrCreateMemo,
   promptAndVerifyPassword,
 } from "../utils/memo.ts";
-import { Select } from "@cliffy/prompt";
+import { Input } from "@cliffy/prompt";
 
 async function view(_option: CommandOptions) {
   try {
@@ -16,9 +16,11 @@ async function view(_option: CommandOptions) {
     await promptAndVerifyPassword(config);
 
     const memo = await loadOrCreateMemo();
-    const selectedKey = await Select.prompt({
+    const selectedKey = await Input.prompt({
       message: "please select key.",
-      options: memo.map((v) => v.key),
+      list: true,
+      info: true,
+      suggestions: memo.map((v) => v.key),
     });
     const findMemo = memo.find((m) => m.key === selectedKey);
     if (findMemo) {
